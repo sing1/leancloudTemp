@@ -12,6 +12,11 @@ app.use(history({
 // 提供打包后的静态资源
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// 健康检查端点，便于 LeanCloud 健康检测
+app.get('/health', (req, res) => {
+  res.status(200).send('ok');
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`LeanCloud-compatible server listening on port ${port}`);
